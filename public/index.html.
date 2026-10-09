@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101114">
+<title>Nova AI</title>
+<style>
+:root{--bg:#101114;--panel:#17181d;--panel2:#22232b;--text:#f4f4f7;--muted:#9b9ca9;--border:#30313a;--accent:#8b7cff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px system-ui,-apple-system,sans-serif;height:100dvh;overflow:hidden}button,input,textarea{font:inherit}button{cursor:pointer;color:inherit}.app{display:flex;height:100dvh}.sidebar{width:260px;flex-shrink:0;background:#15161a;border-right:1px solid var(--border);display:flex;flex-direction:column;padding:15px 12px}.brand{display:flex;align-items:center;gap:10px;padding:5px 7px 22px;font-weight:800;font-size:19px}.logo{display:grid;place-items:center;width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,#8b7cff,#5797ff)}.new,.side,.hist{width:100%;border:1px solid var(--border);border-radius:11px;padding:11px;background:transparent;text-align:left;margin-bottom:7px}.new{background:linear-gradient(110deg,#8172ff,#627df7);border:0;font-weight:700}.side:hover,.hist:hover{background:var(--panel2)}.label{font-size:11px;letter-spacing:1px;color:var(--muted);padding:20px 8px 8px;text-transform:uppercase}.history{overflow:auto;flex:1}.hist{border:0;color:var(--muted);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.hist.active{background:var(--panel2);color:var(--text)}.profile{border-top:1px solid var(--border);padding:14px 5px 3px;font-size:13px}.profile small{display:block;color:var(--muted);margin-top:3px}.main{flex:1;min-width:0;display:flex;flex-direction:column}.top{height:60px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 20px;border-bottom:1px solid var(--border)}.top button,.tiny{border:1px solid var(--border);background:var(--panel);border-radius:9px;padding:8px 10px}.status{font-size:11px;color:#d5ceff;background:#29253d;border-radius:20px;padding:6px 9px;margin-left:8px}.content{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center}.welcome{margin:auto 0;padding:25px;text-align:center;width:min(800px,100%)}.symbol{margin:auto auto 20px;width:64px;height:64px;border-radius:21px;display:grid;place-items:center;font-size:30px;background:linear-gradient(135deg,#8b7cff,#5797ff)}h1{font-size:clamp(28px,4vw,39px);margin:0 0 10px}.sub{color:var(--muted);line-height:1.6}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:24px}.card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:15px;text-align:left}.card b{display:block;margin-bottom:6px}.card small{color:var(--muted)}.messages{display:none;width:min(820px,100%);flex:1;overflow:auto;padding:25px 22px}.msg{display:flex;gap:12px;margin-bottom:25px}.avatar{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:var(--panel2);flex-shrink:0}.msgbody{min-width:0;flex:1;line-height:1.65;overflow-wrap:anywhere}.role{font-weight:700;font-size:13px;margin:4px 0 8px}.msgtext{white-space:pre-wrap}.thinking{display:flex;gap:8px;align-items:center;color:var(--muted);font-size:13px;margin:12px 0}.dots span{display:inline-block;width:5px;height:5px;background:var(--accent);border-radius:50%;margin:0 2px;animation:pulse 1s infinite}.dots span:nth-child(2){animation-delay:.15s}.dots span:nth-child(3){animation-delay:.3s}@keyframes pulse{50%{opacity:.2;transform:translateY(-3px)}}.research{border:1px solid var(--border);border-radius:12px;padding:11px 13px;margin:12px 0;background:var(--panel);font-size:12px}.research summary{cursor:pointer;color:#c9c0ff;font-weight:700}.source{display:block;color:#9fc6ff;margin-top:9px;overflow-wrap:anywhere}.compose{width:min(820px,100%);padding:8px 20px 15px}.box{background:#1b1c22;border:1px solid #383943;border-radius:18px;padding:11px}.box textarea{display:block;width:100%;min-height:45px;max-height:150px;resize:none;background:transparent;border:0;outline:0;color:var(--text);padding:6px}.controls{display:flex;align-items:center;justify-content:space-between;gap:8px}.tools{display:flex;gap:7px;flex-wrap:wrap}.tool{font-size:12px;background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:8px;padding:7px}.tool.active{border-color:#8172ff;color:#d4ccff}.send{width:38px;height:38px;border:0;border-radius:12px;background:linear-gradient(135deg,#9180ff,#5b8bff);font-size:19px}.hint{text-align:center;color:var(--muted);font-size:10px;padding-top:9px}.file-label{cursor:pointer}.file-label input{display:none}.error{color:#ffb7b7;background:#392424;border:1px solid #754040;border-radius:10px;padding:12px;margin-top:10px;font-size:13px}.auth{position:fixed;inset:0;background:#101114;z-index:20;display:none;align-items:center;justify-content:center;padding:20px}.authbox{width:min(410px,100%);background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:25px}.authbox h2{margin-top:0}.authbox input{width:100%;padding:12px;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--text);margin:7px 0}.authbox button{width:100%;padding:11px;border-radius:10px;border:1px solid var(--border);background:var(--panel2);margin-top:8px}.authbox .primary{background:var(--accent);border:0}.authnote{font-size:12px;color:var(--muted);line-height:1.5}.authclose{float:right!important;width:auto!important}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#30313a;border:1px solid #474853;border-radius:10px;padding:10px 14px;display:none;z-index:30;font-size:12px}
+@media(max-width:700px){.sidebar{position:fixed;z-index:10;inset:0 auto 0 0;transform:translateX(-100%);transition:.2s;box-shadow:20px 0 40px #0004}.sidebar.open{transform:translateX(0)}.top{padding:0 11px;height:55px}.status{display:none}.compose{padding:8px 9px 12px}.messages{padding:20px 12px}.welcome{padding:20px 13px}.card{padding:12px}.card b{font-size:13px}.card small{font-size:11px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+  <div class="brand"><div class="logo">✦</div>Nova AI</div>
+  <button class="new" id="newChat">＋ Neuer Chat</button>
+  <button class="side" data-mode="KI-Chat">✧ KI-Chat</button>
+  <button class="side" data-mode="Programmieren">⌘ Programmieren</button>
+  <button class="side" data-mode="Recherche">⌕ Recherche</button>
+  <button class="side" data-mode="Video-KI">▶ Video-KI</button>
+  <div class="label">Chatverlauf</div><div class="history" id="history"></div>
+  <div class="profile"><b id="userLabel">Gastmodus</b><small id="authState">Lokale Chat-Speicherung</small><button class="tiny" id="authButton" style="margin-top:10px">Anmelden / Konto</button></div>
+</aside>
+<main class="main">
+  <header class="top"><div><button id="menu">☰</button> <b id="modeTitle">KI-Chat</b><span class="status" id="status">Verbindung wird geprüft …</span></div><button id="loginTop">Anmelden</button></header>
+  <section class="content">
+    <div class="welcome" id="welcome"><div class="symbol">✦</div><h1>Was möchtest du <span style="color:#a99aff">erschaffen?</span></h1><p class="sub">Schreibe eine Nachricht. Wenn der KI-Server eingerichtet ist, erhältst du echte Antworten.</p><div class="cards">
+      <button class="card" data-prompt="Hilf mir, eine moderne Website zu erstellen."><b>✧ Website erstellen</b><small>Ideen und Code entwickeln</small></button>
+      <button class="card" data-prompt="Schreibe und erkläre mir ein Beispielprogramm."><b>⌘ Programmieren</b><small>Code schreiben und verstehen</small></button>
+      <button class="card" data-prompt="Recherchiere im Internet zu diesem Thema: "><b>⌕ Web-Recherche</b><small>Quellen suchen und anzeigen</small></button>
+      <button class="card" data-prompt="Hilf mir, ein Video zu analysieren."><b>▶ Video-Analyse</b><small>Unterstützung abhängig vom Modell</small></button>
+    </div></div>
+    <div class="messages" id="messages"></div>
+    <div class="compose"><div class="box"><textarea id="prompt" rows="1" placeholder="Schreibe deine Nachricht …"></textarea><div class="controls"><div class="tools"><button class="tool active" data-mode="KI-Chat">✦ Chat</button><button class="tool" id="webToggle">⌕ Websuche</button><label class="tool file-label">＋ Datei<input id="file" type="file" accept="image/*,video/*,.txt,.md,.csv,.json,.pdf"></label></div><button class="send" id="send" aria-label="Senden">↑</button></div></div><div class="hint">Die KI kann nur antworten, wenn der Server korrekt eingerichtet ist. Keine API-Schlüssel im Browser speichern.</div></div>
+  </section>
+</main>
+</div>
+<div class="auth" id="auth">
+  <div class="authbox"><button class="authclose" id="closeAuth">✕</button><h2>Willkommen bei Nova AI</h2><p class="authnote">Registrierung und Anmeldung benötigen ein konfiguriertes Supabase-Projekt. Passwörter werden nicht von dieser Website selbst gespeichert.</p><input id="email" type="email" placeholder="E-Mail-Adresse" autocomplete="email"><input id="password" type="password" placeholder="Passwort" autocomplete="current-password"><button class="primary" id="signIn">Anmelden</button><button id="signUp">Konto erstellen</button><button id="google">Weiter mit Google</button><button id="apple">Weiter mit Apple</button><p class="authnote" id="authMessage">Wenn Auth nicht konfiguriert ist, werden diese Aktionen nicht als erfolgreich ausgegeben.</p></div>
+</div>
+<div class="toast" id="toast"></div>
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+const $ = id => document.getElementById(id);
+const KEY = 'nova-fullstack-chat-v1';
+let chats = [];
+let currentId = null;
+let mode = 'KI-Chat';
+let webSearch = false;
+let uploadedContext = '';
+let supabase = null;
+let authConfigured = false;
+
+try { chats = JSON.parse(localStorage.getItem(KEY) || '[]'); if (!Array.isArray(chats)) chats=[]; } catch { chats=[]; }
+function save(){ try{localStorage.setItem(KEY,JSON.stringify(chats));}catch{toast('Browser-Speicher ist voll.');} }
+function id(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7);}
+function active(){return chats.find(c=>c.id===currentId)||null;}
+function toast(s){const t=$('toast');t.textContent=s;t.style.display='block';clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.style.display='none',3000);}
+function safeLink(url){try{const u=new URL(url);return ['http:','https:'].includes(u.protocol)?u.href:'#';}catch{return '#';}}
+function renderHistory(){
+  const root=$('history');root.replaceChildren();
+  chats.forEach(c=>{const b=document.createElement('button');b.className='hist'+(c.id===currentId?' active':'');b.textContent=c.title||'Neuer Chat';b.onclick=()=>{currentId=c.id;mode=c.mode||'KI-Chat';render();$('sidebar').classList.remove('open');};root.append(b);});
+}
+function render(){
+  renderHistory();$('modeTitle').textContent=mode;
+  document.querySelectorAll('[data-mode]').forEach(b=>b.classList.toggle('active',b.dataset.mode===mode));
+  const chat=active(),has=!!chat&&chat.messages.length>0;
+  $('welcome').style.display=has?'none':'block';$('messages').style.display=has?'block':'none';$('messages').replaceChildren();
+  if(!chat)return;
+  for(const m of chat.messages){
+    const row=document.createElement('div');row.className='msg';
+    const av=document.createElement('div');av.className='avatar';av.textContent=m.role==='user'?'N':'✦';
+    const body=document.createElement('div');body.className='msgbody';
+    const role=document.createElement('div');role.className='role';role.textContent=m.role==='user'?'Du':'Nova AI';
+    const txt=document.createElement('div');txt.className='msgtext';txt.textContent=m.content;
+    body.append(role,txt);
+    if(m.sources?.length){
+      const details=document.createElement('details');details.className='research';
+      const sum=document.createElement('summary');sum.textContent=`Quellen und Recherche (${m.sources.length})`;details.append(sum);
+      m.sources.forEach((s,i)=>{const a=document.createElement('a');a.className='source';a.href=safeLink(s.url);a.target='_blank';a.rel='noopener noreferrer';a.textContent=`${i+1}. ${s.title||s.url} — ${s.url}`;details.append(a);});
+      body.append(details);
+    }
+    if(m.note){const n=document.createElement('div');n.className='research';n.textContent=m.note;body.append(n);}
+    row.append(av,body);$('messages').append(row);
+  }
+  $('messages').scrollTop=$('messages').scrollHeight;
+}
+function newChat(){const c={id:id(),title:'Neuer Chat',mode,messages:[]};chats.unshift(c);currentId=c.id;save();render();$('prompt').focus();$('sidebar').classList.remove('open');}
+function addMsg(role,content,extra={}){const c=active();c.messages.push({role,content,...extra});save();render();}
+function setMode(m){mode=m;const c=active();if(c)c.mode=m;save();render();}
+async function status(){
+  try{
+    const r=await fetch('/api/status');const s=await r.json();
+    $('status').textContent=s.aiConfigured?'KI verbunden': 'KI nicht eingerichtet';
+    if(s.authConfigured){
+      const {createClient}=await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
+      // Browser configuration is served from the server to avoid hardcoding public project values.
+      const cfg=await fetch('/api/auth-config').then(x=>x.ok?x.json():null).catch(()=>null);
+      if(cfg?.url&&cfg?.anonKey){supabase=createClient(cfg.url,cfg.anonKey);authConfigured=true;await updateSession();}
+    }
+  }catch{$('status').textContent='Server nicht erreichbar';}
+}
+async function updateSession(){
+  if(!supabase)return;
+  const {data}=await supabase.auth.getSession();
+  const user=data?.session?.user;
+  $('userLabel').textContent=user?.email||'Gastmodus';
+  $('authState').textContent=user?'Angemeldet':'Lokale Chat-Speicherung';
+  $('authButton').textContent=user?'Konto / Abmelden':'Anmelden / Konto';
+}
+async function send(){
+  const text=$('prompt').value.trim();if(!text&&!uploadedContext)return;
+  if(!active())newChat();
+  const chat=active();
+  const content=text+(uploadedContext?'\n\nDatei-Kontext:\n'+uploadedContext:'');
+  chat.messages.push({role:'user',content});if(chat.title==='Neuer Chat')chat.title=(text||'Datei').slice(0,36);save();
+  $('prompt').value='';uploadedContext='';render();
+  const pending=document.createElement('div');pending.className='msg';pending.id='pending';
+  pending.innerHTML='<div class="avatar">✦</div><div class="msgbody"><div class="role">Nova AI</div><div class="thinking"><span class="dots"><span></span><span></span><span></span></span><span id="thinkingText">Anfrage wird gesendet …</span></div><div class="research" id="steps">Verbinde mit dem KI-Server …</div></div>';
+  $('messages').style.display='block';$('welcome').style.display='none';$('messages').append(pending);$('messages').scrollTop=$('messages').scrollHeight;
+  const step=$('steps'),thinking=$('thinkingText');
+  try{
+    if(webSearch){thinking.textContent='Websuche wird ausgeführt …';step.textContent='Der Server sucht echte Webseiten und übergibt die Ergebnisse an das Modell.';}
+    else {thinking.textContent='KI erstellt eine Antwort …';step.textContent='Die Anfrage wird an das konfigurierte KI-Modell gesendet.';}
+    const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:chat.messages.map(m=>({role:m.role,content:m.content})),webSearch})});
+    const data=await response.json();
+    if(!response.ok)throw new Error(data.error||`Serverfehler ${response.status}`);
+    chat.messages.push({role:'assistant',content:data.reply,sources:data.sources||[],note:data.searchNote||''});
+    save();render();
+  }catch(e){
+    chat.messages.push({role:'assistant',content:'Ich konnte keine KI-Antwort erhalten.\n\nFehler: '+e.message+'\n\nBitte prüfe, ob der Server läuft und die KI-Zugangsdaten in der serverseitigen .env-Datei eingerichtet sind.'});
+    save();render();
+  }
+}
+$('newChat').onclick=newChat;$('send').onclick=send;
+$('prompt').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}});
+$('prompt').addEventListener('input',()=>{$('prompt').style.height='auto';$('prompt').style.height=Math.min($('prompt').scrollHeight,150)+'px';});
+document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
+document.querySelectorAll('[data-prompt]').forEach(b=>b.onclick=()=>{$('prompt').value=b.dataset.prompt;$('prompt').focus();});
+$('webToggle').onclick=()=>{webSearch=!webSearch;$('webToggle').classList.toggle('active',webSearch);toast(webSearch?'Echte Websuche angefordert':'Websuche ausgeschaltet');};
+$('menu').onclick=()=>$('sidebar').classList.toggle('open');
+$('authButton').onclick=$('loginTop').onclick=()=>$('auth').style.display='flex';
+$('closeAuth').onclick=()=>$('auth').style.display='none';
+$('signIn').onclick=async()=>{if(!supabase)return $('authMessage').textContent='Supabase ist noch nicht konfiguriert. Prüfe SUPABASE_URL und SUPABASE_ANON_KEY.';const {error}=await supabase.auth.signInWithPassword({email:$('email').value,password:$('password').value});$('authMessage').textContent=error?.message||'Anmeldung erfolgreich.';await updateSession();};
+$('signUp').onclick=async()=>{if(!supabase)return $('authMessage').textContent='Supabase ist noch nicht konfiguriert. Prüfe SUPABASE_URL und SUPABASE_ANON_KEY.';const {error}=await supabase.auth.signUp({email:$('email').value,password:$('password').value});$('authMessage').textContent=error?.message||'Registrierung angefragt. Prüfe dein E-Mail-Postfach.';};
+$('google').onclick=()=>oauth('google');$('apple').onclick=()=>oauth('apple');
+async function oauth(provider){if(!supabase)return $('authMessage').textContent='Supabase ist noch nicht konfiguriert.';const {error}=await supabase.auth.signInWithOAuth({provider,options:{redirectTo:location.origin}});if(error)$('authMessage').textContent=error.message;}
+supabase?.auth?.onAuthStateChange?.(()=>updateSession());
+$('file').addEventListener('change',async()=>{
+  const f=$('file').files[0];if(!f)return;
+  toast('Datei wird hochgeladen …');
+  try{
+    const fd=new FormData();fd.append('file',f);
+    const r=await fetch('/api/upload',{method:'POST',body:fd});const d=await r.json();
+    if(!r.ok)throw new Error(d.error||'Upload fehlgeschlagen');
+    uploadedContext=`Datei: ${d.file.name} (${d.file.type}, ${d.file.size} Bytes)\n${d.extractedText||''}\n${d.note||''}`;
+    $('prompt').value=$('prompt').value||`Bitte hilf mir mit der hochgeladenen Datei "${f.name}".`;
+    toast(d.note||'Datei bereit. Sende deine Nachricht, um fortzufahren.');
+  }catch(e){toast(e.message);}
+});
+if(chats.length)currentId=chats[0].id;else newChat();
+render();status();
+</script>
+</body>
+</html>
