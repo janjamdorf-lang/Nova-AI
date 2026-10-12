@@ -1,0 +1,6 @@
+# Beispiel für die serverseitige Render-Environment-Konfiguration.
+# Ersetze die Beispieladresse durch die echte, erreichbare Ollama-Instanz.
+AI_BACKEND=ollama
+OLLAMA_BASE_URL=https://DEINE-OLLAMA-INSTANZ
+NOVA_MODEL=nova-ai
+MAX_UPLOAD_MB=25
