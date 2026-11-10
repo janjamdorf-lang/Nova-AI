@@ -26,7 +26,7 @@ services:
         value: sb_publishable_877mgATS6_10vNSwKR36DA_rFW1XBV1
 
       - key: GOOGLE_CLIENT_ID
-        sync: false
+        value: "HIER_DEINE_GOOGLE_CLIENT_ID_EINTRAGEN"
 
       - key: GOOGLE_CLIENT_SECRET
-        sync: false
+        value: "HIER_DEIN_GOOGLE_CLIENT_SECRET_EINTRAGEN"
