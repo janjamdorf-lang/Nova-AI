@@ -1,3 +1,4 @@
+
 services:
   - type: web
     name: nova-ai
@@ -9,6 +10,7 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
+
       - key: AI_BASE_URL
         sync: false
       - key: AI_API_KEY
@@ -17,7 +19,9 @@ services:
         sync: false
       - key: TAVILY_API_KEY
         sync: false
+
       - key: SUPABASE_URL
-        sync: false
+        value: https://puyuquoafjhtzzwmegaz.supabase.co
+
       - key: SUPABASE_ANON_KEY
-        sync: false
+        value: sb_publishable_877mgATS6_10vNSwKR36DA_rFW1XBV1
